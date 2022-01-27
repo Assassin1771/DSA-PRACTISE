@@ -10,67 +10,26 @@
  */
 class Solution {
 public:
-    
-    ListNode* createLL(ListNode* res,int x)
-    {
-        ListNode *final=new ListNode(x);
-        
-        if(res==NULL)
-        {
-            res=final;
-            return res;
-        }
-        
-        ListNode* temp=res;
-        while(temp->next!=NULL)
-        {
-            temp=temp->next;
-        }
-        
-        temp->next=final;
-        final->val=x;
-        final->next=NULL;
-        
-        return res;
-        
-    }
-    
     ListNode* oddEvenList(ListNode* head) {
         
-        vector<int> odd;
-        vector<int> even;
+        if(head==NULL or head->next==NULL or head->next->next==NULL)
+            return head;
         
-        int flag=1;
-        ListNode* temp=head;
-        while(temp!=NULL)
+        ListNode* odd=head;
+        ListNode* even=head->next;
+        ListNode* even_start=head->next;
+        
+        while(odd->next and even->next)
         {
-            if(flag==1)
-            {
-                odd.push_back(temp->val);
-                flag=0;
-            }
+            odd->next=even->next;
+            even->next=odd->next->next;
             
-            else
-            {
-                even.push_back(temp->val);
-                flag=1;
-            }
-        
-            temp=temp->next;
+            odd=odd->next;
+            even=even->next;
         }
         
-        ListNode* res;
-        for(int i=0;i<odd.size();i++)
-        {
-            res=createLL(res,odd[i]);
-        }
-        
-        for(int i=0;i<even.size();i++)
-        {
-            res=createLL(res,even[i]);
-        }
-        
-        return res;
+        odd->next=even_start;
+        return head;
         
     }
 };
