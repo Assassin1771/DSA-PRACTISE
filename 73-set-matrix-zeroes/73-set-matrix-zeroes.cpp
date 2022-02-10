@@ -12,7 +12,9 @@ public:
     
     void setZeroes(vector<vector<int>>& matrix) {
         
-        vector<vector<int>> temp=matrix;
+        // vector<vector<int>> temp=matrix;
+        
+        vector<pair<int,int>> v;
     
         int m=matrix.size();
         int n=matrix[0].size();
@@ -23,12 +25,13 @@ public:
             {
                 if(matrix[i][j]==0)
                 {
-                    solve(i,j,temp);
+                    v.push_back({i,j});
                 }
             }
         }
         
-        matrix=temp;
+        for(auto i:v)
+            solve(i.first,i.second,matrix);
         
     }
 };
