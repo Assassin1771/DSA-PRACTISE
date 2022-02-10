@@ -1,3 +1,5 @@
+//CHECK ALL SUBMISSIONS
+
 class Solution {
 public:
     
@@ -20,8 +22,8 @@ public:
         int m=matrix.size();
         int n=matrix[0].size();
         
-        set<int> s1;
-        set<int> s2;
+        set<int> s1; //STORING ROW NUMBER
+        set<int> s2; //STORING COL NUMBER
         
         for(int i=0;i<m;i++)
         {
