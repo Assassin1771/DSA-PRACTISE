@@ -19,6 +19,8 @@ public:
         
 //         return res;
         
+        
+//      OPTIMISED O(1)        
         int n=height.size();
         int i=0,j=n-1;
         
