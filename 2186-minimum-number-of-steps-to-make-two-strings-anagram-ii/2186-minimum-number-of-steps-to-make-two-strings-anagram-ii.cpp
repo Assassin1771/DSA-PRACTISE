@@ -7,9 +7,6 @@ public:
         
         int res=0;
         
-        sort(s.begin(),s.end());
-        sort(t.begin(),t.end());
-        
         vector<int> a(26);
         vector<int> b(26);
         
