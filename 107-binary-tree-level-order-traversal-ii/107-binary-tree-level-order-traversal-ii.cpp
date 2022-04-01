@@ -12,17 +12,7 @@
 class Solution {
 public:
     
-    int calculateHeight(TreeNode* root)
-    {
-        if(root==NULL)
-            return 0;
-        
-        return max(calculateHeight(root->left),calculateHeight(root->right))+1;
-    }
-    
     vector<vector<int>> levelOrderBottom(TreeNode* root) {
-        
-        int height=calculateHeight(root);
         
         queue<TreeNode*> q;
         q.push(root);
