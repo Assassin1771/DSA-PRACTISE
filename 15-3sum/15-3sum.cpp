@@ -1,9 +1,9 @@
-// #define pair<pair<int,int>,int> datatype
-
 class Solution {
 public:
     
-    void check(int x, vector<int> &nums, int l, set<pair<pair<int,int>,int>> &s)
+    using datatype=pair<pair<int,int>,int>;
+    
+    void check(int x, vector<int> &nums, int l, set<datatype> &s)
     {
         int h=nums.size()-1;
         int start=l-1;
