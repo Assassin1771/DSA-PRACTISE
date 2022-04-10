@@ -12,17 +12,17 @@
 class Solution {
 public:
     
-    int findHeight(TreeNode* root)
-    {
-        if(!root)
-            return 0;
+//     int findHeight(TreeNode* root)
+//     {
+//         if(!root)
+//             return 0;
         
-        return max(findHeight(root->left),findHeight(root->right))+1;
-    }
+//         return max(findHeight(root->left),findHeight(root->right))+1;
+//     }
     
     int findBottomLeftValue(TreeNode* root) {
         
-        int height=findHeight(root);
+        // int height=findHeight(root);
         
         queue<TreeNode*> q;
         q.push(root);
@@ -32,17 +32,16 @@ public:
         while(q.size())
         {
             int count=q.size();
-            height--;
+            // height--;
             
             for(int i=0;i<count;i++)
             {   
                 TreeNode* curr=q.front();
                 q.pop();
                  
-                if(height==0)
+                if(i==0)
                 {
                     res=curr->val;
-                    return curr->val;
                 }
                 
                 if(curr->left)
