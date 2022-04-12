@@ -7,12 +7,21 @@ public:
         vector<string> s1;
         string temp="";
         
+        string res="";
         for(int i=0;i<n;i++)
         {
             if(s[i]==' ')
             {
                 if(temp.size())
-                s1.push_back(temp);
+                {
+                    string temp1=temp;
+                    reverse(temp1.begin(),temp1.end());
+                    
+                    // s1.push_back(temp1);
+                    
+                    res+=(temp1);
+                    res.push_back(' ');
+                }
                 
                 temp.clear();
             }
@@ -25,21 +34,14 @@ public:
         }
         
         if(temp.size())
-        s1.push_back(temp);
-        
-        // for(int i=0;i<s1.size();i++)
-        // {
-        //     cout<<i<<" "<<s1[i]<<endl;
-        // }
-        
-        string res="";
-        for(int i=s1.size()-1;i>=0;i--)
         {
-            res+=s1[i];
-            res.push_back(' ');
+            string temp1=temp;
+            reverse(temp1.begin(),temp1.end());
+            
+            res+=(temp1);
         }
-        
-        res.pop_back();
+        if(res.back() == ' ') res.pop_back();
+        reverse(res.begin(),res.end());
         
         return res;
         
