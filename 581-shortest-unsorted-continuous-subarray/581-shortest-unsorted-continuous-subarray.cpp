@@ -7,35 +7,6 @@ public:
         if(n==1)
             return 0;
         
-//         if(n==2)
-//             return (nums[0]<=nums[1]?0:2);
-        
-//         int ind1=-1,ind2=-1;
-//         int maxx=nums[0];
-        
-//         for(int i=1;i<n;i++)
-//         {
-//             if(nums[i]<nums[i-1] or nums[i]<maxx)
-//             {
-//                 if(ind1==-1)
-//                 {
-//                     ind1=i-1;
-//                     ind2=i;
-                    
-//                     maxx=nums[i-1];
-//                 }
-                
-//                 else
-//                     ind2=i;
-//             }
-            
-//             else
-//                 maxx=nums[i];
-//         }
-        
-//         if(ind1==-1 or ind2==-1)
-//             return 0;
-        
         int ind1=-1,ind2=-1;
         
         vector<int> temp=nums;
