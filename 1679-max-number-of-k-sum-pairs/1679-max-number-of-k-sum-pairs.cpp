@@ -4,32 +4,19 @@ public:
         
         int n=nums.size();
         
-        if(n==1)
-            return 0;
+        unordered_map<int,int> mp;
         
         int res=0;
-        
-        sort(nums.begin(),nums.end());
-        
-        int i=0,j=n-1;
-        while(i<j)
+        for(auto i:nums)
         {
-            int val=nums[i]+nums[j];
-            
-            if(val==k)
+            if(mp[k-i]>0)
             {
                 res++;
-                i++;
-                j--;
-            }
-            
-            else if(val<k)
-            {
-                i++;
+                mp[k-i]--;
             }
             
             else
-                j--;
+                mp[i]++;
         }
         
         return res;
