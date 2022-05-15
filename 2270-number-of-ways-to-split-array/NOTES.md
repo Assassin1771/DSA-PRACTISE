@@ -1,1 +1,1 @@
-​
+https://leetcode.com/problems/number-of-ways-to-split-array/discuss/2038290/C%2B%2B-or-Prefix-Sum-or-Easy-O(N)-solution
