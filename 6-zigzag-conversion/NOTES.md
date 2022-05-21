@@ -1,0 +1,1 @@
+https://leetcode.com/problems/zigzag-conversion/discuss/920510/c%2B%2B(8ms-90)-very-easy-for-understand-(with-commentaries)
