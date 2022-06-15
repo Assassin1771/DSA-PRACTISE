@@ -16,12 +16,12 @@ public:
     
     void findInorder(TreeNode* root)
     {
-        if(root!=NULL)
-        {
-            findInorder(root->left);
-            inorder.push_back(root->val);
-            findInorder(root->right);    
-        }
+        if(root==NULL)
+            return;
+        
+        findInorder(root->left);
+        inorder.push_back(root->val);
+        findInorder(root->right);
     }
     
     TreeNode* buildTree(int start, int end)
@@ -30,22 +30,22 @@ public:
             return NULL;
         
         int mid=(start+end)/2;
+        TreeNode* head=new TreeNode(inorder[mid]);   
         
-        TreeNode* root=new TreeNode(inorder[mid]);
+        head->left=buildTree(start,mid-1);
+        head->right=buildTree(mid+1,end);
         
-        root->left=buildTree(start,mid-1);
-        root->right=buildTree(mid+1,end);
-        
-        return root;
+        return head;
     }
     
     TreeNode* balanceBST(TreeNode* root) {
-        if(!root)
+        
+        if(root==NULL)
             return NULL;
         
         findInorder(root);
-        
-        int n=inorder.size();
-        return buildTree(0,n-1);
+    
+        return buildTree(0,inorder.size()-1);
+    
     }
 };
