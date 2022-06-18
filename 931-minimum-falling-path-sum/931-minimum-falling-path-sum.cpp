@@ -24,11 +24,11 @@ public:
         
         int n=mat.size();
         
-        
+        vector<vector<int>> dp(n, vector<int> (n,-1));
         int res=1e9;
         for(int i=0;i<n;i++)
         {
-            vector<vector<int>> dp(n, vector<int> (n,-1));
+            
             res=min(res,minSum(n-1,i,mat,dp));
             
             // dp.clear();
