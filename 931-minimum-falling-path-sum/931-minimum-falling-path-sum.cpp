@@ -1,45 +1,40 @@
 class Solution {
 public:
     
-    int minFallingPathSum(vector<vector<int>>& matrix) {
+    int minSum(int x, int y, vector<vector<int>> &mat, vector<vector<int>> &dp)
+    {
+        int n=mat.size();
+        if(y>=n or y<0)
+            return 1e9;
         
-        int n=matrix.size();
-        vector<vector<int>> dp(n,vector<int>(n,-1));
+        if(x==0)
+            return mat[x][y];
         
-        for(int i=0;i<n;i++)
-        {
-            dp[0][i]=matrix[0][i];
-        }
-        
-        for(int i=1;i<n;i++)
-        {
-            for(int j=0;j<n;j++)
-            {
-                int up=matrix[i][j]+dp[i-1][j];
-                int left=matrix[i][j];
-                int right=matrix[i][j];
-                
-                if(j-1>=0)
-                    left+=dp[i-1][j-1];
-                
-                else
-                    left+=1e9;
-                
-                if(j+1<n)
-                    right+=dp[i-1][j+1];
-                    
-                else
-                    right+=1e9;
-                
-                dp[i][j]=min(up,min(left,right));
-            }
-        }
-        
-        int minn=1e9;
-        for(int i=0;i<n;i++)
-            minn=min(minn,dp[n-1][i]);
+        if(dp[x][y]!=-1)
+            return dp[x][y];
     
-        return minn;
+        int up=mat[x][y]+minSum(x-1,y,mat,dp);
+        int left=mat[x][y]+minSum(x-1,y-1,mat,dp);
+        int right=mat[x][y]+minSum(x-1,y+1,mat,dp);
         
+        return dp[x][y]=min(up,min(left,right));
+    }
+    
+    int minFallingPathSum(vector<vector<int>>& mat) {
+        
+        int n=mat.size();
+        
+        
+        int res=1e9;
+        for(int i=0;i<n;i++)
+        {
+            vector<vector<int>> dp(n, vector<int> (n,-1));
+            res=min(res,minSum(n-1,i,mat,dp));
+            
+            // dp.clear();
+            // memset(dp,-1,sizeof(dp));
+        }
+        
+        return res;
     }
 };
