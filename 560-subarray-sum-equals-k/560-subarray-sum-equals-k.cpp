@@ -2,36 +2,26 @@ class Solution {
 public:
     int subarraySum(vector<int>& nums, int k) {
         
-        int n= nums.size();
-        int sum=0, count=0;
+        int n=nums.size();
         
-        map<int, int>s;
+        unordered_map<int,int> map;
+        int sum=0;
+        int res=0;
         
         for(int i=0;i<n;i++)
         {
-            sum += nums[i];
-         
+            sum+=nums[i];
+            
             if(sum==k)
-            {
-                // cout<<"a"<<endl;
-                count++;
-            }
-                
+                res++;
             
-            if(s.find(sum-k)!=s.end())
-            {
-                // cout<<"b"<<' '<<sum<<endl;
-                count+=s[sum-k];
-            }
+            if(map.find(sum-k)!=map.end())
+                res+=map[sum-k];
             
-            s[sum]++;
-        } 
+            map[sum]++;
+        }
         
-        // for(auto [x,y]:s)
-        //     cout<<x<<" "<<y<<endl;
-        
-        return count;
-
+        return res;
         
     }
 };
