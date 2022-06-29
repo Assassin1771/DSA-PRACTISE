@@ -11,24 +11,36 @@
  */
 class Solution {
 public:
-    bool ans = false;
-    bool sumTree(TreeNode* root, int t,int sum)
+    
+    bool checkPaths(TreeNode* root, int sum, int t)
     {
-        if(root)
+        if(root==NULL)
+            return false;
+        
+        if(root->left==NULL and root->right==NULL)
         {
             sum+=root->val;
-            if(root->left == NULL && root->right == NULL and sum == t)
-                return true;
             
-            return sumTree(root->left,t,sum) || sumTree(root->right,t,sum);
+            if(sum==t)
+                return true;
         }
-                
-        return false;
+        
+        sum+=root->val;
+        
+        return checkPaths(root->left,sum,t) or checkPaths(root->right,sum,t);        
+            
     }
     
     bool hasPathSum(TreeNode* root, int targetSum) {
         
+        if(root==NULL and targetSum==0)
+            return false;
+        
+        // if(root->left==NULL and root->right==NULL and root->val==targetSum)
+        //     return true;
+        
         int sum=0;
-        return sumTree(root,targetSum,sum);
+        return checkPaths(root,sum,targetSum);
+        
     }
 };
