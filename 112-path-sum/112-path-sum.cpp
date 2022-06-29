@@ -36,9 +36,6 @@ public:
         if(root==NULL and targetSum==0)
             return false;
         
-        // if(root->left==NULL and root->right==NULL and root->val==targetSum)
-        //     return true;
-        
         int sum=0;
         return checkPaths(root,sum,targetSum);
         
