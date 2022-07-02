@@ -19,36 +19,36 @@ class Solution
         
         key[0]=0;
         
-        for(int i=0;i<v-1;i++)
+        priority_queue<pair<int,int>, vector<pair<int,int>>, greater<pair<int,int>>> pq;
+        pq.push({0,0});
+        
+        while(pq.size())
         {
-            int minn=1e9+7, min_index=-1;
-            for(int j=0;j<v;j++)
-            {
-                if(mst[j]==false and key[j]<minn)
-                {
-                    minn=key[j];
-                    min_index=j;
-                }
-            }
+            int curr_key=pq.top().first;
+            int curr_node=pq.top().second;
             
-            mst[min_index]=true;
+            pq.pop();
             
-            for(auto j:adj[min_index])
+            mst[curr_node]=true;
+            
+            for(auto i:adj[curr_node])
             {
-                int next_node=j[0];
-                int next_dist=j[1];
+                int next_node=i[0];
+                int next_dist=i[1];
                 
-                if(mst[next_node]==false and next_dist<key[next_node])
+                if(mst[next_node]==false and key[next_node]>next_dist)
                 {
-                    parent[next_node]=min_index;
+                    parent[next_node]=curr_node;
                     key[next_node]=next_dist;
+                    
+                    pq.push({next_dist, next_node});
                 }
             }
         }
-    
+        
         int sum=0;
         for(auto i:key)
-        sum+=i;
+            sum+=i;
         
         return sum;
         
