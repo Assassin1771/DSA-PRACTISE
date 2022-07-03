@@ -18,7 +18,7 @@ public:
         int direction=1;
         
         ListNode* curr=head;
-        while(curr!=NULL and top<=bottom and left<=right)
+        while(top<=bottom and left<=right)
         {
             if(direction==1)
             {
@@ -38,9 +38,8 @@ public:
                 direction=2;
             }
             
-            if(direction==2)
+            else if(direction==2)
             {
-                cout<<2<<endl;
                 for(int i=top;i<=bottom;i++)
                 {   
                     if(curr)
@@ -58,7 +57,7 @@ public:
                 direction=3;
             }
             
-            if(direction==3)
+            else if(direction==3)
             {
                 for(int i=right;i>=left;i--)
                 {
@@ -76,7 +75,7 @@ public:
                 direction=4;
             }
             
-            if(direction==4)
+            else if(direction==4)
             {
                 for(int i=bottom;i>=top;i--)
                 {
