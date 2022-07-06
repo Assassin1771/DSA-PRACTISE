@@ -10,12 +10,11 @@ public:
         {
             for(int j=0;j<i;j++)
             {
-                if(nums[i]>nums[j] and dp[i]<=dp[j])
-                    dp[i]++;
+                if(nums[i]>nums[j] and dp[i]<dp[j]+1)
+                    dp[i]=dp[j]+1;
             }
         }
         
         return *max_element(dp.begin(),dp.end());
-        
     }
 };
