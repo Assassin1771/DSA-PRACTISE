@@ -32,8 +32,6 @@ class Solution{
 	        }
 	    }
 	    
-
-	    
 	    int maxx=0;
 	    for(int i=0;i<n;i++)
 	    {
