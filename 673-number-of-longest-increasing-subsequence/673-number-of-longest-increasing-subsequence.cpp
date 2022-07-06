@@ -5,27 +5,31 @@ public:
         int n=nums.size();
         
         vector<int> dp(n,1);
-        vector<int> count(n,1);
+        vector<int> count(n,1); // stores count of longest sequence of length lis[i]
         
         for(int i=1;i<n;i++)
         {
             for(int j=0;j<i;j++)
             {
-                if(nums[i]>nums[j] and dp[i]<dp[j]+1)
+                if(nums[i]>nums[j])
                 {
-                    dp[i]=dp[j]+1;
-                    count[i]=count[j];
+                    if(dp[i]<dp[j]+1) // strictly increasing
+                    {
+                        dp[i]=dp[j]+1;
+                        count[i]=count[j];
+                    }       
+                 // this means there are more subsequences of same length ending at length lis[i]
+                    else if(dp[j]+1==dp[i]) 
+                        count[i]+=count[j];
                 }
-                
-                else if(nums[i]>nums[j] and dp[j]+1==dp[i])
-                    count[i]+=count[j];
             }
         }
         
         int target=*max_element(dp.begin(),dp.end());
         int numOfLIS = 0;
         
-        for(int i=0;i<n;i++){
+        for(int i=0;i<n;i++)
+        {
             if(dp[i]==target)
                 numOfLIS += count[i];
         }
