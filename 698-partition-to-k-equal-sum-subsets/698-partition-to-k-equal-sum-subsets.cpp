@@ -19,12 +19,16 @@ public:
             if(vis[i]==1 or curr_sum+nums[i]>target)
                 continue;
             
-            vis[i]=1;
+            if(vis[i]==0)
+            {
+                vis[i]=1;
             
-            if(findSubsets(nums,vis,target,k,curr_sum+nums[i],i+1))
+                if(findSubsets(nums,vis,target,k,curr_sum+nums[i],i+1))
                 return true;
             
-            vis[i]=0;
+                vis[i]=0;    
+            }
+            
         }
         
         return false;
