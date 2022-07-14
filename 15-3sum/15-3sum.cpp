@@ -1,63 +1,58 @@
 class Solution {
 public:
     
-    using datatype=pair<pair<int,int>,int>;
-    
-    void check(int x, vector<int> &nums, int l, set<datatype> &s)
+    void findPair(int i, int curr, vector<int> &nums,vector<vector<int>> &res)
     {
-        int h=nums.size()-1;
-        int start=l-1;
-        
-        while(l<h)
+        int j=nums.size()-1;
+       
+        vector<int> temp(3,-1e9);
+       
+        while(i<j)
         {
-            int y=nums[l]+nums[h]+x;
-            
-            if(y==0)
+            int sum=nums[i]+nums[j];
+           
+            if(sum+curr==0)
             {
-                s.insert({{nums[start],nums[l]},nums[h]});
-                l++;
+                temp[0] = curr;
+                temp[1]=nums[i];
+                temp[2]=nums[j];
+               
+                while(i < nums.size() && nums[i] == temp[1]) i++;
+                while(j >= 0 && nums[j] == temp[2]) j--;
+               
+                res.push_back(temp);
+               
             }
-            
-            else if(y>0)
-                h--;
-            
+           
+            else if(sum+curr>0)
+                j--;
+           
             else
-                l++;
+                i++;
         }
+       
+       
     }
-    
+   
     vector<vector<int>> threeSum(vector<int>& nums) {
-        
+       
         int n=nums.size();
-        
-        set<pair<pair<int,int>,int>> s;
-        
+       
+        vector<vector<int>> res;
+       
         sort(nums.begin(),nums.end());
-        
+       
         for(int i=0;i<n;i++)
         {
-            int x=nums[i];
-            
-            check(x,nums,i+1,s);
+            int curr=nums[i];
+           
+            findPair(i+1,curr,nums,res);
+                       
+            while(i+1<n && nums[i+1] == nums[i]) i++;
         }
-        
-        vector<vector<int>> res;
-        
-        for(auto i:s)
-        {
-            int a=i.first.first;
-            int b=i.first.second;
-            int c=i.second;
-            
-            vector<int> temp;
-            temp.push_back(a);
-            temp.push_back(b);
-            temp.push_back(c);
-            
-            res.push_back(temp);
-        }
-        
+       
         return res;
-        
+       
     }
+
 };
