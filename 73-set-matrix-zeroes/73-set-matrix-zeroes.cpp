@@ -1,29 +1,12 @@
-//CHECK ALL SUBMISSIONS
-
 class Solution {
 public:
-    
-    void solve1(int x,vector<vector<int>> &temp)
-    {
-        for(int i=0;i<temp[0].size();i++)
-            temp[x][i]=0;
-    }
-    
-    void solve2(int y,vector<vector<int>> &temp)
-    {        
-        for(int i=0;i<temp.size();i++)
-            temp[i][y]=0;
-    }
-    
     void setZeroes(vector<vector<int>>& matrix) {
         
-        // vector<vector<int>> temp=matrix;
-    
         int m=matrix.size();
         int n=matrix[0].size();
         
-        set<int> s1; //STORING ROW NUMBER
-        set<int> s2; //STORING COL NUMBER
+        vector<int> row(m,0);
+        vector<int> col(n,0);
         
         for(int i=0;i<m;i++)
         {
@@ -31,17 +14,20 @@ public:
             {
                 if(matrix[i][j]==0)
                 {
-                    s1.insert(i);
-                    s2.insert(j);
+                    row[i]=1;
+                    col[j]=1;
                 }
             }
         }
         
-        for(auto i:s1)
-            solve1(i,matrix);
-        
-        for(auto i:s2)
-            solve2(i,matrix);
+        for(int i=0;i<m;i++)
+        {
+            for(int j=0;j<n;j++)
+            {
+                if(row[i]==1 or col[j]==1)
+                    matrix[i][j]=0;
+            }
+        }
         
     }
 };
