@@ -1,25 +1,38 @@
-// https://leetcode.com/problems/merge-intervals/discuss/482195/C%2B%2B-9-lines-99-Run-Time-Easy-to-understand-solution
-
 class Solution {
 public:
-    vector<vector<int>> merge(vector<vector<int>>& nums) {
+    
+    bool static comp(vector<int> &a, vector<int> &b)
+    {
+        if(a[0]<b[0])
+            return true;
         
-        int n=nums.size();
-        sort(nums.begin(),nums.end());
+        return false;
+    }
+    
+    vector<vector<int>> merge(vector<vector<int>>& intervals) {
+        
+        int n=intervals.size();
+        
+        sort(intervals.begin(),intervals.end(),comp);
         
         vector<vector<int>> res;
-        
-        res.push_back(nums[0]);
+        res.push_back(intervals[0]);
         
         for(int i=1;i<n;i++)
         {
-            int m=res.size();
+            vector<int> prev=res.back();
+            vector<int> curr=intervals[i];
             
-            if(res[m-1][1]>=nums[i][0])
-                res[m-1][1]=max(res[m-1][1],nums[i][1]);
+            if(prev[1]<curr[0])
+                res.push_back(curr);
             
             else
-                res.push_back(nums[i]);
+            {
+                res.pop_back();
+                
+                prev[1]=max(prev[1],curr[1]);
+                res.push_back(prev);
+            }
         }
         
         return res;
