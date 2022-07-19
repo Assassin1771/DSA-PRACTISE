@@ -1,44 +1,7 @@
 class Solution {
 public:
     
-    bool isSafe(int x, int y, vector<vector<int>> &mat)
-    {
-        int row=x, col=y;
-        
-        while(x>=0 and y>=0)
-        {
-            if(mat[x][y]==1)
-                return false;
-            
-            x--;
-            y--;
-        }
-        
-        x=row, y=col;
-        
-        while(x<mat.size() and y>=0)
-        {
-            if(mat[x][y]==1)
-                return false;
-            
-            x++;
-            y--;
-        }
-        
-        x=row, y=col;
-        
-        while(y>=0)
-        {
-            if(mat[x][y]==1)
-                return false;
-            
-            y--;
-        }
-        
-        return true;
-    }
-    
-    void findNQueens(int col, vector<vector<int>> &mat, vector<vector<string>> &res)
+    void findNQueens(int col, vector<vector<int>> &mat, vector<vector<string>> &res, vector<int> &leftRow, vector<int> &lowerDiagonal, vector<int> &upperDiagonal)
     {
         if(col==mat.size())
         {
@@ -66,11 +29,19 @@ public:
         
         for(int row=0;row<mat.size();row++)
         {
-            if(isSafe(row,col,mat))
+            if(leftRow[row]==0 and upperDiagonal[mat.size()-1+col-row]==0 and lowerDiagonal[row+col]==0)
             {
+                leftRow[row]=1;
+                upperDiagonal[mat.size()-1+col-row]=1;
+                lowerDiagonal[row+col]=1;
+                
                 mat[row][col]=1;
-                findNQueens(col+1,mat,res);
+                findNQueens(col+1,mat,res,leftRow,lowerDiagonal,upperDiagonal);
                 mat[row][col]=0;
+                
+                leftRow[row]=0;
+                upperDiagonal[mat.size()-1+col-row]=0;
+                lowerDiagonal[row+col]=0;
             }
         }
     }
@@ -80,7 +51,11 @@ public:
         vector<vector<string>> res;
         vector<vector<int>> mat(n, vector<int> (n,0));
         
-        findNQueens(0,mat,res);
+        vector<int> leftRow(n,0);
+        vector<int> upperDiagonal(2*n-1,0);
+        vector<int> lowerDiagonal(2*n-1,0);
+        
+        findNQueens(0,mat,res,leftRow,upperDiagonal,lowerDiagonal);
         
         return res.size();
         
