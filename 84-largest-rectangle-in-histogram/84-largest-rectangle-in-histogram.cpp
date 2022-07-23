@@ -4,13 +4,12 @@ public:
         
         int n=heights.size();
         
-        vector<int> left_smaller(n), right_smaller(n);
-        
+        vector<int> left_smaller(n,0), right_smaller(n,0);
         stack<int> st;
         
         for(int i=0;i<n;i++)
         {
-            while(st.empty()==false and heights[i]<heights[st.top()])
+            while(st.size() and heights[st.top()]>heights[i])
             {
                 right_smaller[st.top()]=i-1;
                 st.pop();
@@ -27,7 +26,7 @@ public:
         
         for(int i=n-1;i>=0;i--)
         {
-            while(st.empty()==false and heights[i]<heights[st.top()])
+            while(st.size() and heights[st.top()]>heights[i])
             {
                 left_smaller[st.top()]=i+1;
                 st.pop();
@@ -41,7 +40,7 @@ public:
             left_smaller[st.top()]=0;
             st.pop();
         }
-        
+
         int res=0;
         for(int i=0;i<n;i++)
         {
@@ -50,6 +49,5 @@ public:
         }
         
         return res;
-        
     }
 };
